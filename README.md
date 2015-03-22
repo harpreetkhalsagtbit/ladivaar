@@ -1,4 +1,4 @@
-larivaarnitnem
+Larivaarnitnem
 ==============
 
 Easy to read Larivaar Nitnem Bani App
