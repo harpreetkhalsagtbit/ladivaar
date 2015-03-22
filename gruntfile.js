@@ -33,20 +33,20 @@ module.exports = function(grunt) {
 		        ]
 		    }
 		},
-'json-format': {
-    test: {
-        options: {
-            indent: 4
-        },
-        files: [
-            {
-                expand: true,
-                src:  ['./test.json'],
-                dest: './'
-            }
-        ]
-    }
-}
+		'json-format': {
+		    test: {
+		        options: {
+		            indent: 4
+		        },
+		        files: [
+		            {
+		                expand: true,
+		                src:  ['./test.json'],
+		                dest: './'
+		            }
+		        ]
+		    }
+		}
 	})
 
     // Actually load this plugin's task(s).
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
 grunt.loadNpmTasks('grunt-convert');
 grunt.loadNpmTasks('grunt-json-format');
 
-	grunt.registerTask('seed', function() {
+	grunt.registerTask('unicodeConversion', function() {
 		var unicodeJsonObject = []
 		var mappingObject = JSON.parse(fs.readFileSync('../Unicode-Input/lib/core/lang/punjabi/_jsonMaps/gurbaniAkharSlim.json').toString());
 		var gurbaniJSON = JSON.parse(fs.readFileSync('@@All Siri Guru Granth Sahib in Gurmukhi, without Index/word/document.json').toString());
@@ -69,17 +69,17 @@ grunt.loadNpmTasks('grunt-json-format');
 				if(_docContent && _docContent[i] && _docContent[i]["w:r"] && _docContent[i]["w:r"]["w:t"] && _docContent[i]["w:r"]["w:t"]["_"]) {
 					_docContent[i]["w:r"]["w:t"]["_"] = convertToUnicodeCLI(_docContent[i]["w:r"]["w:t"]["_"], mappingObject)
 					unicodeJsonObject.push({
-						"pankti": _docContent[i]["w:r"]["w:t"]["_"]
+						"bold_Pankti": _docContent[i]["w:r"]["w:t"]["_"]
 					})
 				} else if(_docContent && _docContent[i] && _docContent[i]["w:r"].length) {
 					var obj = {
-						"pankti": []
+						"normal_pankti": []
 					}
 					for(var j=0;j<_docContent[i]["w:r"].length;j++) {
 						if(_docContent[i]["w:r"][j] && _docContent[i]["w:r"][j]["w:t"] && _docContent[i]["w:r"][j]["w:t"]["_"]) {
 							_docContent[i]["w:r"][j]["w:t"]["_"] = convertToUnicodeCLI(_docContent[i]["w:r"][j]["w:t"]["_"], mappingObject)
-							obj.pankti.push({
-								"sub-pankti": _docContent[i]["w:r"][j]["w:t"]["_"]
+							obj["normal_pankti"].push({
+								"pankti": _docContent[i]["w:r"][j]["w:t"]["_"]
 							})
 						}
 					}
@@ -92,7 +92,7 @@ grunt.loadNpmTasks('grunt-json-format');
 	});
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
-    grunt.registerTask('default', ['rename:renameDocxToZip', 'unzip:extractZipFile', 'rename:renameZipToDocx', 'convert:xml2json', 'seed', 'json-format:test']);
+    grunt.registerTask('default', ['rename:renameDocxToZip', 'unzip:extractZipFile', 'rename:renameZipToDocx', 'convert:xml2json', 'unicodeConversion', 'json-format:test']);
 }
 
 var convertToUnicodeCLI = function(text, mappingString) {
