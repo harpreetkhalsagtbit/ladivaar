@@ -33,12 +33,20 @@ module.exports = function(grunt) {
 		        ]
 		    }
 		},
-	  'json-pretty': {
-	      options: {
-	        files: './test.json',
-	        indent: 4
-	      },
-	   }
+'json-format': {
+    test: {
+        options: {
+            indent: 4
+        },
+        files: [
+            {
+                expand: true,
+                src:  ['./test.json'],
+                dest: './'
+            }
+        ]
+    }
+}
 	})
 
     // Actually load this plugin's task(s).
@@ -48,7 +56,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-rename');
   grunt.loadNpmTasks('grunt-zip');
 grunt.loadNpmTasks('grunt-convert');
-grunt.loadNpmTasks('grunt-json-pretty');
+grunt.loadNpmTasks('grunt-json-format');
 
 	grunt.registerTask('seed', function() {
 		var unicodeJsonObject = []
@@ -84,7 +92,7 @@ grunt.loadNpmTasks('grunt-json-pretty');
 	});
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
-    grunt.registerTask('default', ['rename:renameDocxToZip', 'unzip:extractZipFile', 'rename:renameZipToDocx', 'convert:xml2json', 'seed', 'json-pretty']);
+    grunt.registerTask('default', ['rename:renameDocxToZip', 'unzip:extractZipFile', 'rename:renameZipToDocx', 'convert:xml2json', 'seed', 'json-format:test']);
 }
 
 var convertToUnicodeCLI = function(text, mappingString) {
