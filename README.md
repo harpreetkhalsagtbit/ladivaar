@@ -1,7 +1,8 @@
-Larivaarnitnem
+Larivaar
 ==============
 
-Easy to read Larivaar Nitnem Bani App
+Easy to read Larivaar Gurbani App
+Creating a *JSON* of complete **Sri Guru Granth Sahin Jeeee**
 
 ##Supported By##
 [Unicode-Input](https://github.com/harpreetkhalsagtbit/Unicode-Input)
