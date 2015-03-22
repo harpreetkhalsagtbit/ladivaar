@@ -2,6 +2,7 @@ Larivaar
 ==============
 
 Easy to read Larivaar Gurbani App
+
 Creating a *JSON* of complete **Sri Guru Granth Sahin Jeeee**
 
 ##Supported By##
