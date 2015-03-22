@@ -88,7 +88,7 @@ grunt.loadNpmTasks('grunt-json-format');
 			}
 			gurbaniJSON["w:document"]["w:body"]["w:p"] = _docContent
 		}
-        fs.writeFileSync('test.json', JSON.stringify(unicodeJsonObject));
+        fs.writeFileSync('SGGS.json', JSON.stringify(unicodeJsonObject));
 	});
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
