@@ -73,12 +73,15 @@ grunt.loadNpmTasks('grunt-json-format');
 
 					if(_docContent[i]["w:r"] && _docContent[i]["w:r"]["w:rPr"] && _docContent[i]["w:r"]["w:rPr"]["w:rFonts"] && _docContent[i]["w:r"]["w:rPr"]["w:rFonts"]["w:ascii"] == "AnmolRaised") {
 						_panktiObj["bold_Pankti"] = _docContent[i]["w:r"]["w:t"]["_"]
+						if(_docContent[i]["w:r"]["w:tab"] == "") {
+							_panktiObj["tab"] = true;
+						}
 					} else {
 						_panktiObj["arrayOfPankti"] = []
-
+						var obj = {};
 						// Page break - when no Array Pankti
 						if(_docContent[i]["w:r"]["w:lastRenderedPageBreak"] == "") {
-							var _lastObj = obj["arrayOfPankti"][obj["arrayOfPankti"].length - 1]
+							var _lastObj = _panktiObj["arrayOfPankti"][_panktiObj["arrayOfPankti"].length - 1]
 							if(_lastObj) {
 								_lastObj["pageBreak"] = true
 								_lastObj["ang"] = ++count
@@ -92,9 +95,11 @@ grunt.loadNpmTasks('grunt-json-format');
 							}
 						}
 
-						_panktiObj["arrayOfPankti"].push({
-							"pankti":_docContent[i]["w:r"]["w:t"]["_"]
-						})
+						obj["pankti"] = _docContent[i]["w:r"]["w:t"]["_"]
+						if(_docContent[i]["w:r"]["w:tab"] == "") {
+							obj["tab"] = true;
+						}
+						_panktiObj["arrayOfPankti"].push(obj)
 					}
 
 					unicodeJsonObject.push(_panktiObj)
@@ -137,6 +142,9 @@ grunt.loadNpmTasks('grunt-json-format');
 							obj = {
 								"arrayOfPankti": []
 							}
+						}
+						if(_docContent[i]["w:r"][j]["w:tab"] == "") {
+							_panktiObj["tab"] = true;
 						}
 
 						if(JSON.stringify(_panktiObj) != "{}") {
