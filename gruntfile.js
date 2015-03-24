@@ -97,11 +97,23 @@ grunt.loadNpmTasks('grunt-json-format');
 
 						}
 
+
 						if(_docContent[i]["w:r"][j]["w:lastRenderedPageBreak"] == "") {
-							_panktiObj["pageBreak"] = true
-							_panktiObj["ang"] = ++count
+							var _lastObj = obj["arrayOfPankti"][obj["arrayOfPankti"].length - 1]
+							if(_lastObj) {
+								_lastObj["pageBreak"] = true
+								_lastObj["ang"] = ++count
+							} else {
+								var _lastBigObj = unicodeJsonObject[unicodeJsonObject.length-1]
+								var _lastObj = _lastBigObj["arrayOfPankti"][_lastBigObj["arrayOfPankti"].length - 1]
+								_lastObj["pageBreak"] = true
+								_lastObj["ang"] = ++count
+							}
 						}
-						obj["arrayOfPankti"].push(_panktiObj)
+
+						if(JSON.stringify(_panktiObj) != "{}") {
+							obj["arrayOfPankti"].push(_panktiObj)
+						}
 					}
 					unicodeJsonObject.push(obj)
 				}
