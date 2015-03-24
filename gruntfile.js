@@ -73,12 +73,15 @@ grunt.loadNpmTasks('grunt-json-format');
 
 					if(_docContent[i]["w:r"] && _docContent[i]["w:r"]["w:rPr"] && _docContent[i]["w:r"]["w:rPr"]["w:rFonts"] && _docContent[i]["w:r"]["w:rPr"]["w:rFonts"]["w:ascii"] == "AnmolRaised") {
 						_panktiObj["bold_Pankti"] = _docContent[i]["w:r"]["w:t"]["_"]
+						if(_docContent[i]["w:r"]["w:tab"] == "") {
+							_panktiObj["tab"] = true;
+						}
 					} else {
 						_panktiObj["arrayOfPankti"] = []
-
+						var obj = {};
 						// Page break - when no Array Pankti
 						if(_docContent[i]["w:r"]["w:lastRenderedPageBreak"] == "") {
-							var _lastObj = obj["arrayOfPankti"][obj["arrayOfPankti"].length - 1]
+							var _lastObj = _panktiObj["arrayOfPankti"][_panktiObj["arrayOfPankti"].length - 1]
 							if(_lastObj) {
 								_lastObj["pageBreak"] = true
 								_lastObj["ang"] = ++count
@@ -92,9 +95,11 @@ grunt.loadNpmTasks('grunt-json-format');
 							}
 						}
 
-						_panktiObj["arrayOfPankti"].push({
-							"pankti":_docContent[i]["w:r"]["w:t"]["_"]
-						})
+						obj["pankti"] = _docContent[i]["w:r"]["w:t"]["_"]
+						if(_docContent[i]["w:r"]["w:tab"] == "") {
+							obj["tab"] = true;
+						}
+						_panktiObj["arrayOfPankti"].push(obj)
 					}
 
 					unicodeJsonObject.push(_panktiObj)
@@ -138,6 +143,9 @@ grunt.loadNpmTasks('grunt-json-format');
 								"arrayOfPankti": []
 							}
 						}
+						if(_docContent[i]["w:r"][j]["w:tab"] == "") {
+							_panktiObj["tab"] = true;
+						}
 
 						if(JSON.stringify(_panktiObj) != "{}") {
 							obj["arrayOfPankti"].push(_panktiObj)
@@ -150,9 +158,59 @@ grunt.loadNpmTasks('grunt-json-format');
 		}
         fs.writeFileSync('SGGS.json', JSON.stringify(unicodeJsonObject));
 	});
+
+	grunt.registerTask('htmlConversion', function() {
+        var _sggsJson = JSON.parse(fs.readFileSync('SGGS.json').toString());
+        var _startSection = "<section>"
+        var _endSection = "</section>\n"
+        var _startH_Tag = "<h3>"
+        var _endH_Tag = "</h3>\n"
+        var _startP_Tag = "<p>"
+        var _endP_Tag = "</p>\n"
+
+    	var _ang = '';
+    	var _arrayAngs = [];
+        for(var i=0;i<_sggsJson.length;i++) {
+        	if(_ang == '') {
+        		_ang += _startSection;
+        	}
+        	if(_sggsJson[i]["bold_Pankti"]) {
+        		_ang += _startH_Tag + _sggsJson[i]["bold_Pankti"] + _endH_Tag
+        		if(_sggsJson[i]["pageBreak"]) {
+        			_ang += _endSection
+        			_arrayAngs.push(_ang)
+        			_ang = '';
+        		}
+
+        	} else if(_sggsJson[i]["arrayOfPankti"]) {
+        		for(var j=0;j<_sggsJson[i]["arrayOfPankti"].length;j++) {
+        			if(_sggsJson[i]["arrayOfPankti"][j]["bold_Pankti"]) {
+		        		_ang += _startH_Tag + _sggsJson[i]["arrayOfPankti"][j]["bold_Pankti"] + _endH_Tag
+        			} else if(_sggsJson[i]["arrayOfPankti"][j]["pankti"]) {
+		        		_ang += _startP_Tag + _sggsJson[i]["arrayOfPankti"][j]["pankti"] + _endP_Tag
+        			}
+	        		if(_sggsJson[i]["arrayOfPankti"][j]["pageBreak"]) {
+	        			_ang += _endSection
+	        			_arrayAngs.push(_ang)
+	        			_ang = '';
+	        		}
+        		}
+        	}
+        	if(i == _sggsJson.length) {
+        		// No page break at last
+    			_ang += _endSection
+    			_arrayAngs.push(_ang)
+    			_ang = '';
+        	}
+        }
+        var _htmlContent = fs.readFileSync('../reveal.js/indexLarivaar.html').toString();
+        _htmlContent = _htmlContent.replace("{{sggs_content}}", _arrayAngs.join("\n"))
+        fs.writeFileSync('../reveal.js/indexLarivaar.html', _htmlContent)
+ 	});
+
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
-    grunt.registerTask('default', ['rename:renameDocxToZip', 'unzip:extractZipFile', 'rename:renameZipToDocx', 'convert:xml2json', 'unicodeConversion', 'json-format:test']);
+    grunt.registerTask('default', ['rename:renameDocxToZip', 'unzip:extractZipFile', 'rename:renameZipToDocx', 'convert:xml2json', 'unicodeConversion', 'json-format:test', 'htmlConversion']);
 }
 
 var convertToUnicodeCLI = function(text, mappingString) {
