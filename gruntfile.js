@@ -83,7 +83,7 @@ grunt.loadNpmTasks('grunt-json-format');
 					var obj = {
 						"arrayOfPankti": []
 					}
-
+					var pageBreakFound = false;
 					for(var j=0;j<_docContent[i]["w:r"].length;j++) {
 						var _panktiObj = {};
 
@@ -108,6 +108,12 @@ grunt.loadNpmTasks('grunt-json-format');
 								var _lastObj = _lastBigObj["arrayOfPankti"][_lastBigObj["arrayOfPankti"].length - 1]
 								_lastObj["pageBreak"] = true
 								_lastObj["ang"] = ++count
+							}
+							pageBreakFound = true
+							unicodeJsonObject.push(JSON.parse(JSON.stringify(obj)))
+							pageBreakFound = false;
+							obj = {
+								"arrayOfPankti": []
 							}
 						}
 
