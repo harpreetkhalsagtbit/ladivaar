@@ -62,7 +62,7 @@ grunt.loadNpmTasks('grunt-json-format');
 		var unicodeJsonObject = []
 		var mappingObject = JSON.parse(fs.readFileSync('../Unicode-Input/lib/core/lang/punjabi/_jsonMaps/gurbaniAkharSlim.json').toString());
 		var gurbaniJSON = JSON.parse(fs.readFileSync('@@All Siri Guru Granth Sahib in Gurmukhi, without Index/word/document.json').toString());
-		var count = 1;
+		var count = 0;
 		if(gurbaniJSON && gurbaniJSON["w:document"] && gurbaniJSON["w:document"]["w:body"] && gurbaniJSON["w:document"]["w:body"]["w:p"]) {
 			var _docContent = gurbaniJSON["w:document"]["w:body"]["w:p"]
 
@@ -74,7 +74,27 @@ grunt.loadNpmTasks('grunt-json-format');
 					if(_docContent[i]["w:r"] && _docContent[i]["w:r"]["w:rPr"] && _docContent[i]["w:r"]["w:rPr"]["w:rFonts"] && _docContent[i]["w:r"]["w:rPr"]["w:rFonts"]["w:ascii"] == "AnmolRaised") {
 						_panktiObj["bold_Pankti"] = _docContent[i]["w:r"]["w:t"]["_"]
 					} else {
-						_panktiObj["arrayOfPankti"] = _docContent[i]["w:r"]["w:t"]["_"]
+						_panktiObj["arrayOfPankti"] = []
+
+						// Page break - when no Array Pankti
+						if(_docContent[i]["w:r"]["w:lastRenderedPageBreak"] == "") {
+							var _lastObj = obj["arrayOfPankti"][obj["arrayOfPankti"].length - 1]
+							if(_lastObj) {
+								_lastObj["pageBreak"] = true
+								_lastObj["ang"] = ++count
+							} else {
+								var _lastBigObj = unicodeJsonObject[unicodeJsonObject.length-1]
+								var _lastObj = _lastBigObj["arrayOfPankti"][_lastBigObj["arrayOfPankti"].length - 1]
+								if(_lastObj) {
+									_lastObj["pageBreak"] = true
+									_lastObj["ang"] = ++count
+								}
+							}
+						}
+
+						_panktiObj["arrayOfPankti"].push({
+							"pankti":_docContent[i]["w:r"]["w:t"]["_"]
+						})
 					}
 
 					unicodeJsonObject.push(_panktiObj)
@@ -97,7 +117,7 @@ grunt.loadNpmTasks('grunt-json-format');
 
 						}
 
-
+						// Page break - Array Pankti
 						if(_docContent[i]["w:r"][j]["w:lastRenderedPageBreak"] == "") {
 							var _lastObj = obj["arrayOfPankti"][obj["arrayOfPankti"].length - 1]
 							if(_lastObj) {
@@ -106,8 +126,10 @@ grunt.loadNpmTasks('grunt-json-format');
 							} else {
 								var _lastBigObj = unicodeJsonObject[unicodeJsonObject.length-1]
 								var _lastObj = _lastBigObj["arrayOfPankti"][_lastBigObj["arrayOfPankti"].length - 1]
-								_lastObj["pageBreak"] = true
-								_lastObj["ang"] = ++count
+								if(_lastObj) {
+									_lastObj["pageBreak"] = true
+									_lastObj["ang"] = ++count
+								}
 							}
 							pageBreakFound = true
 							unicodeJsonObject.push(JSON.parse(JSON.stringify(obj)))
