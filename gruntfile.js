@@ -170,7 +170,7 @@ grunt.loadNpmTasks('grunt-json-format');
 
     	var _ang = '';
     	var _arrayAngs = [];
-        for(var i=0;i<_sggsJson.length;i++) {
+        for(var i=0;i<200/*_sggsJson.length*/;i++) {
         	if(_ang == '') {
         		_ang += _startSection;
         	}
@@ -183,17 +183,24 @@ grunt.loadNpmTasks('grunt-json-format');
         		}
 
         	} else if(_sggsJson[i]["arrayOfPankti"]) {
+        		var _newPankti = true;
         		for(var j=0;j<_sggsJson[i]["arrayOfPankti"].length;j++) {
         			if(_sggsJson[i]["arrayOfPankti"][j]["bold_Pankti"]) {
 		        		_ang += _startH_Tag + _sggsJson[i]["arrayOfPankti"][j]["bold_Pankti"] + _endH_Tag
         			} else if(_sggsJson[i]["arrayOfPankti"][j]["pankti"]) {
-		        		_ang += _startP_Tag + _sggsJson[i]["arrayOfPankti"][j]["pankti"] + _endP_Tag
+        				if(_sggsJson[i]["arrayOfPankti"][j]["tab"] && j != 0) {
+        					_ang = _ang.substring(0, _ang.length - _endP_Tag.length)
+			        		_ang += "&nbsp&nbsp&nbsp&nbsp" + _sggsJson[i]["arrayOfPankti"][j]["pankti"] + _endP_Tag
+        				} else {
+			        		_ang += _startP_Tag + _sggsJson[i]["arrayOfPankti"][j]["pankti"] + _endP_Tag
+        				}
         			}
 	        		if(_sggsJson[i]["arrayOfPankti"][j]["pageBreak"]) {
 	        			_ang += _endSection
 	        			_arrayAngs.push(_ang)
 	        			_ang = '';
 	        		}
+	        		_newPankti = false;
         		}
         	}
         	if(i == _sggsJson.length) {
