@@ -161,12 +161,12 @@ grunt.loadNpmTasks('grunt-json-format');
 
 	grunt.registerTask('htmlConversion', function() {
         var _sggsJson = JSON.parse(fs.readFileSync('SGGS.json').toString());
-        var _startSection = "<section>"
+        var _startSection = "<section data-background='#d9a725'>"
         var _endSection = "</section>\n"
         var _startH_Tag = "<h3>"
         var _endH_Tag = "</h3>\n"
-        var _startP_Tag = "<p>"
-        var _endP_Tag = "</p>\n"
+        var _startP_Tag = "<p><strong>"
+        var _endP_Tag = "</strong></p>\n"
 
     	var _ang = '';
     	var _arrayAngs = [];
