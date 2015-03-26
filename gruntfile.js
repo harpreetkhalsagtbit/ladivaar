@@ -239,6 +239,7 @@ var convertToUnicodeCLI = function(text, mappingString) {
     text = text.replace(/ੑਾ/g,"ਾੑ")
     text = text.replace(/ੑੀ/g,"ੀੑ")
     text = text.replace(/ੑੇ/g,"ੇੑ")
+    text = text.replace(/ਂੀ/g,"ੀਂ")
 
     // text = text.split('<ਬਰ>').join('</p><p>');
     // text = text.split('<ਬਰ>').join('</p><p>');
