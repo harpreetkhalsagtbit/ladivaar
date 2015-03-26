@@ -23,10 +23,11 @@
 			.reveal p {
 				font-size: 25px;
 				margin: 5px;
+				color: #351907
 			}
 	
 			.highlight {
-				background: red;
+				background: #1D74FF;
 			}
 		</style>
 		<!-- Printing and PDF exports -->
@@ -53,7 +54,7 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
-		<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
 
 		<script>
 
@@ -64,7 +65,7 @@
 				progress: true,
 				history: true,
 				center: true,
-
+				slideNumber:true,
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
@@ -77,6 +78,53 @@
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
+       Reveal.addEventListener( 'ready', function( event ) {
+            Reveal.add = function( content,index){ 
+                dom = {},
+
+                dom.slides = document.querySelector( '.reveal .slides' );
+                var newSlide = document.createElement( 'section' );
+                if( index === -1 ) { //adding slide to end
+                    newSlide.classList.add( 'future' );
+                    dom.slides.appendChild(newSlide);
+                    document.querySelector( '.navigate-right' ).classList.add( 'enabled' ); //just enable it, even if it is
+                } else if( index > Reveal.getIndices().h ) {
+                    newSlide.classList.add( 'future' );
+                    dom.slides.insertBefore(newSlide,dom.slides.querySelectorAll('section:nth-child('+(index+1)+')')[0]);
+                } else if( index <= Reveal.getIndices().h ) {
+                    newSlide.classList.add( 'past' );
+                    dom.slides.insertBefore(newSlide,dom.slides.querySelectorAll('section:nth-child('+(index+1)+')')[0]);
+                    Reveal.next();
+                }
+                newSlide.innerHTML = content;
+            };
+            Reveal.remove = function( index){ 
+                dom = {},
+
+                dom.wrapper = document.querySelector( '.reveal' );
+                dom.slides = document.querySelector( '.reveal .slides' );
+                var target = (dom.wrapper.querySelectorAll('.slides > section:nth-child('+(index+1)+')')[0]) ? dom.wrapper.querySelectorAll('.slides > section:nth-child('+(index+1)+')')[0] : false;
+
+                if( index === -1 ) {
+                    if (Reveal.isLastSlide()) Reveal.prev();
+                    dom.slides.removeChild(dom.wrapper.querySelectorAll('.slides > section')[dom.wrapper.querySelectorAll('.slides > section').length-1]);
+                    if (Reveal.isLastSlide()) document.querySelector( '.navigate-right' ).classList.remove( 'enabled' );
+                } else if( index > Reveal.getIndices().h && target ) {
+                    dom.slides.removeChild(target);
+                    if (Reveal.getIndices().h == dom.wrapper.querySelectorAll('.slides > section').length-1) document.querySelector( '.navigate-right' ).classList.remove( 'enabled' );
+                } else if( index < Reveal.getIndices().h && target ) {
+                    dom.slides.removeChild(target);
+                    location.hash = '/'+parseInt(Reveal.getIndices().h-1);
+                } else if( index == Reveal.getIndices().h && target ) {
+                    if (index == 0) {
+                        Reveal.next();
+                        document.querySelector( '.navigate-left' ).classList.remove( 'enabled' );
+                    } else Reveal.prev();
+                    dom.slides.removeChild(target);
+                    if( dom.wrapper.querySelectorAll('.slides > section').length == index) document.querySelector( '.navigate-right' ).classList.remove( 'enabled' );
+                }
+            };
+        } );
 		    $(document).ready(function() {
 		    	$('h3').each(function() {
 	    	    	var wordArray = $(this).html().match(/(.+?)(?:(\s|$))/g);
@@ -105,6 +153,13 @@
 	    		$('h3 span').mouseout(function() {
 	    			$(this).removeClass('highlight')
 	    		});
+	    		$('p span').mouseover(function() {
+	    			$(this).addClass('highlight')
+	    		});
+	    		$('p span').mouseout(function() {
+	    			$(this).removeClass('highlight')
+	    		});
+
 		    })
 
 		</script>
