@@ -164,7 +164,7 @@ grunt.loadNpmTasks('grunt-json-format');
 
 	grunt.registerTask('htmlConversion', function() {
         var _sggsJson = JSON.parse(fs.readFileSync('SGGS.json').toString());
-        var _startSection = "<section data-background='#d9a725'>"
+        var _startSection = "<section id='{{_id}}' data-background='#d9a725'>"
         var _endSection = "</section>\n"
         var _startH_Tag = "<h3>"
         var _endH_Tag = "</h3>\n"
@@ -181,6 +181,7 @@ grunt.loadNpmTasks('grunt-json-format');
         		_ang += _startH_Tag + _sggsJson[i]["bold_Pankti"] + _endH_Tag
         		if(_sggsJson[i]["pageBreak"]) {
         			_ang += _endSection
+        			_ang = _ang.replace("{{_id}}", "Ang-" + _sggsJson[i]["ang"])
         			_arrayAngs.push(_ang)
         			_ang = '';
         		}
@@ -211,6 +212,7 @@ grunt.loadNpmTasks('grunt-json-format');
         			}
 	        		if(_sggsJson[i]["arrayOfPankti"][j]["pageBreak"]) {
 	        			_ang += _endSection
+	        			_ang = _ang.replace("{{_id}}", _sggsJson[i]["arrayOfPankti"][j]["ang"])
 	        			_arrayAngs.push(_ang)
 	        			_ang = '';
 	        		}
@@ -220,6 +222,7 @@ grunt.loadNpmTasks('grunt-json-format');
         	if(i == _sggsJson.length) {
         		// No page break at last
     			_ang += _endSection
+    			_ang = _ang.replace("{{_id}}", "1430")
     			_arrayAngs.push(_ang)
     			_ang = '';
         	}
