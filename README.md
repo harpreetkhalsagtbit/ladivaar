@@ -1,9 +1,9 @@
-Larivaar
+Ladivaar.com
 ==============
 
-Easy to read Larivaar Gurbani App
+Easy to read Ladivaar Gurbani Website
 
-Creating a *JSON* of complete **Sri Guru Granth Sahib Jeeee**
+Created a *JSON* of complete **Sri Guru Granth Sahib Jeeee**
 
 ##Supported By##
 [Unicode-Input](https://github.com/harpreetkhalsagtbit/Unicode-Input)
