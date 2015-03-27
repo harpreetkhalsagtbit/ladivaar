@@ -9,5 +9,5 @@ Created a *JSON* of complete **Sri Guru Granth Sahib Jeeee**
 [Unicode-Input](https://github.com/harpreetkhalsagtbit/Unicode-Input)
 
 ##Demo Images##
-![Waheguru](/assets/larivarpadchedhighlighter.JPG?raw=true)
+![Waheguru](/assets/larivarpadchedhighlighter.png?raw=true)
 
