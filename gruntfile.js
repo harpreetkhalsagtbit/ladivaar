@@ -159,6 +159,11 @@ grunt.loadNpmTasks('grunt-json-format');
 			}
 			gurbaniJSON["w:document"]["w:body"]["w:p"] = _docContent
 		}
+
+		var _lastAng = unicodeJsonObject[unicodeJsonObject.length - 1]["arrayOfPankti"]
+		var _lastPankti = _lastAng[_lastAng.length - 1]
+		_lastPankti["pageBreak"] = true
+		_lastPankti["ang"] = 1430
         fs.writeFileSync('SGGS.json', JSON.stringify(unicodeJsonObject));
 	});
 	
@@ -328,9 +333,15 @@ grunt.loadNpmTasks('grunt-json-format');
 
 				startIndex = _count
 		        endIndex = startIndex + range
+		        if(endIndex > 1400) {
+		        	endIndex = 1430
+		        }
         		splitJson.splice(0);
         	}
         }
+        console.log(each)
+        	console.log(startIndex, endIndex)
+        	fs.writeFileSync("ttt.js", splitJson.toString())
 	});
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
