@@ -324,9 +324,10 @@ grunt.loadNpmTasks('grunt-json-format');
         		ang=1;
 		        var _htmlContent = fs.readFileSync('template.html').toString();
 				
-				var _punjabiAng = convertToUnicodeCLI((startIndex+1) + "-" + _count, mappingObject)
+				var _punjabiAng = convertToUnicodeCLI((startIndex+1) + " - " + _count, mappingObject)
+				_punjabiAng = _punjabiAng.replace("-", "&nbsp-&nbsp")
 		        _htmlContent = _htmlContent.replace("{{angRangePunjabi}}", _punjabiAng)
-		        _htmlContent = _htmlContent.replace("{{angRangeEnglish}}", (startIndex+1) + "-" + _count)
+		        _htmlContent = _htmlContent.replace("{{angRangeEnglish}}", (startIndex+1) + "&nbsp-&nbsp" + _count)
 		        _htmlContent = _htmlContent.replace("{{sggs_content}}", splitJson.join("\n"))
 		        fs.writeFileSync('../reveal.js/ang/' + (startIndex+1) + "_" + _count + ".html", _htmlContent)
 		        // fs.writeFileSync('../reveal.js/indexLarivaar.html', _htmlContent)
@@ -339,9 +340,6 @@ grunt.loadNpmTasks('grunt-json-format');
         		splitJson.splice(0);
         	}
         }
-        console.log(each)
-        	console.log(startIndex, endIndex)
-        	fs.writeFileSync("ttt.js", splitJson.toString())
 	});
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this

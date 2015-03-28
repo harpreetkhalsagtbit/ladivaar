@@ -25,7 +25,11 @@
 				margin: 5px;
 				color: #351907
 			}
-	
+		
+			.reveal pre {
+				text-align: center
+			}
+
 			.highlight {
 				background: #1D74FF;
 			}
@@ -33,6 +37,17 @@
 			span {
 				border-radius: 10px;
 			}
+
+			.reveal a {
+				font-size: 28px;
+				text-decoration: underline;
+				color: #351907
+			}
+
+			.reveal a:hover {
+				color: #1D74FF
+			}
+
 		</style>
 		<!-- Printing and PDF exports -->
 		<script>
@@ -56,13 +71,14 @@
 				<h3> ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ</h3>
 				<p><strong>(ਲੜੀਵਾਰ)</strong></p>
 				<p><strong>(ਅੰਗ&nbsp{{angRangePunjabi}})</strong></p>
-				<h3> Shri Guru Granth Sahib Jee</h3>
-				<p><strong>(Ladivaar)</strong></p>
+				<h3> Sri Guru Granth Sahib Jee</h3>
+				<p><strong>(Ladivaar&nbsp-&nbspContinuous)</strong></p>
 				<p><strong>(Ang&nbsp{{angRangeEnglish}})</strong></p>
-				</br>
-				</br>
-				</br>
+				<pre><strong>Instructions/User Manual</strong></pre>
+				<pre><strong>1. Hover/Mouse Up over word to Know correct Pad-Ched</strong></pre>
+				<pre><strong>2. Use Arrow Keys &lt- -&gt or Space Key to Change the Angs</strong></pre>
 				<p style="float:right">(Ladivaar.com)</p>
+				<p style="float:left">Powered&nbspBy</p><a style="float:left" target="_blank" href="https://github.com/hakimel/reveal.js">Reveal.js</a>
 			</section>
 			{{sggs_content}}
 			</div>
