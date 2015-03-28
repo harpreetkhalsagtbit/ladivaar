@@ -311,14 +311,13 @@ grunt.loadNpmTasks('grunt-json-format');
 		var mappingObject = JSON.parse(fs.readFileSync('../Unicode-Input/lib/core/lang/punjabi/_jsonMaps/gurbaniAkharSlim.json').toString());
         for(var each in jsonContent) {
         	_count++;
-        	console.log(_count , range)
         	if(_count < endIndex) {
         		splitJson.push(jsonContent[each].replace("{{_id}}", ang))
         		ang++;
         	} else if(_count == endIndex) {
         		splitJson.push(jsonContent[each].replace("{{_id}}", ang))
         		ang=1;
-		        var _htmlContent = fs.readFileSync('../reveal.js/template.html').toString();
+		        var _htmlContent = fs.readFileSync('template.html').toString();
 				
 				var _punjabiAng = convertToUnicodeCLI((startIndex+1) + "-" + _count, mappingObject)
 		        _htmlContent = _htmlContent.replace("{{angRangePunjabi}}", _punjabiAng)
