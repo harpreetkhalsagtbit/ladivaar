@@ -324,7 +324,7 @@ grunt.loadNpmTasks('grunt-json-format');
 		        _htmlContent = _htmlContent.replace("{{angRangePunjabi}}", _punjabiAng)
 		        _htmlContent = _htmlContent.replace("{{angRangeEnglish}}", (startIndex+1) + "-" + _count)
 		        _htmlContent = _htmlContent.replace("{{sggs_content}}", splitJson.join("\n"))
-		        fs.writeFileSync('../reveal.js/' + (startIndex+1) + "_" + _count + ".html", _htmlContent)
+		        fs.writeFileSync('../reveal.js/ang/' + (startIndex+1) + "_" + _count + ".html", _htmlContent)
 		        // fs.writeFileSync('../reveal.js/indexLarivaar.html', _htmlContent)
 
 				startIndex = _count
