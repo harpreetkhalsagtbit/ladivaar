@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Laadivaar.com - Easy to read Ladivaar Sri Guru Granth Sahib Jee</title>
+
+		<meta name="description" content="A easy to read Ladivaar Larivaar Sri Guru Granth Sahib Jee">
+		<meta name="author" content="Harpreet Singh">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<style type="text/css">
+			.reveal p {
+				font-size: 25px;
+				margin: 5px;
+				color: #351907
+			}
+	
+			.highlight {
+				background: #1D74FF;
+			}
+
+			span {
+				border-radius: 10px;
+			}
+
+			.reveal a {
+			  color: #351907;
+			}
+			.reveal a:hover {
+			  color: #1D74FF;
+			}
+
+		</style>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+			<section id="home" data-background="#d9a725" class="has-light-background present" style="top: 34.5px; display: block;">
+				<h2>Sri Guru Granth Sahib Sainchiyan Ladivaar</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Ang</th>
+							<th>Ang</th>
+							<th>Ang</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><strong><a href="ang/1_100.html" target="_blank">1-100</a></strong></td>
+							<td><strong><a href="ang/501_600.html" target="_blank">501-600</a></strong></td>
+							<td><strong><a href="ang/1001_1100.html" target="_blank">1001-1100</a></strong></td>
+						</tr><tr>
+						</tr><tr>
+							<td><strong><a href="ang/101_200.html" target="_blank">101-200</a></strong></td>
+							<td><strong><a href="ang/601_700.html" target="_blank">601-700</a></strong></td>
+							<td><strong><a href="ang/1101_1200.html" target="_blank">1101-1200</a></strong></td>
+						</tr><tr>
+						</tr><tr>
+							<td><strong><a href="ang/201_300.html" target="_blank">201-300</a></strong></td>
+							<td><strong><a href="ang/701_800.html" target="_blank">701-800</a></strong></td>
+							<td><strong><a href="ang/1201_1300.html" target="_blank">1201-1300</a></strong></td>
+						</tr><tr>
+						</tr><tr>
+							<td><strong><a href="ang/301_400.html" target="_blank">301-400</a></strong></td>
+							<td><strong><a href="ang/801_900.html" target="_blank">801-900</a></strong></td>
+							<td><strong><a href="ang/1301_1400.html" target="_blank">1301-1400</a></strong></td>
+						</tr><tr>
+						</tr><tr>
+							<td><strong><a href="ang/401_500.html" target="_blank">401-500</a></strong></td>
+							<td><strong><a href="ang/901_1000.html" target="_blank">901-1000</a></strong></td>
+							<td><strong><a href="ang/1401_1430.html" target="_blank">1401-1430</a></strong></td>
+						</tr><tr>
+					</tr></tbody>
+				</table>
+			</section>			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber:true,
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+       Reveal.addEventListener( 'ready', function( event ) {
+            Reveal.add = function( content,index){ 
+                dom = {},
+
+                dom.slides = document.querySelector( '.reveal .slides' );
+                var newSlide = document.createElement( 'section' );
+                if( index === -1 ) { //adding slide to end
+                    newSlide.classList.add( 'future' );
+                    dom.slides.appendChild(newSlide);
+                    document.querySelector( '.navigate-right' ).classList.add( 'enabled' ); //just enable it, even if it is
+                } else if( index > Reveal.getIndices().h ) {
+                    newSlide.classList.add( 'future' );
+                    dom.slides.insertBefore(newSlide,dom.slides.querySelectorAll('section:nth-child('+(index+1)+')')[0]);
+                } else if( index <= Reveal.getIndices().h ) {
+                    newSlide.classList.add( 'past' );
+                    dom.slides.insertBefore(newSlide,dom.slides.querySelectorAll('section:nth-child('+(index+1)+')')[0]);
+                    Reveal.next();
+                }
+                newSlide.innerHTML = content;
+            };
+            Reveal.remove = function( index){ 
+                dom = {},
+
+                dom.wrapper = document.querySelector( '.reveal' );
+                dom.slides = document.querySelector( '.reveal .slides' );
+                var target = (dom.wrapper.querySelectorAll('.slides > section:nth-child('+(index+1)+')')[0]) ? dom.wrapper.querySelectorAll('.slides > section:nth-child('+(index+1)+')')[0] : false;
+
+                if( index === -1 ) {
+                    if (Reveal.isLastSlide()) Reveal.prev();
+                    dom.slides.removeChild(dom.wrapper.querySelectorAll('.slides > section')[dom.wrapper.querySelectorAll('.slides > section').length-1]);
+                    if (Reveal.isLastSlide()) document.querySelector( '.navigate-right' ).classList.remove( 'enabled' );
+                } else if( index > Reveal.getIndices().h && target ) {
+                    dom.slides.removeChild(target);
+                    if (Reveal.getIndices().h == dom.wrapper.querySelectorAll('.slides > section').length-1) document.querySelector( '.navigate-right' ).classList.remove( 'enabled' );
+                } else if( index < Reveal.getIndices().h && target ) {
+                    dom.slides.removeChild(target);
+                    location.hash = '/'+parseInt(Reveal.getIndices().h-1);
+                } else if( index == Reveal.getIndices().h && target ) {
+                    if (index == 0) {
+                        Reveal.next();
+                        document.querySelector( '.navigate-left' ).classList.remove( 'enabled' );
+                    } else Reveal.prev();
+                    dom.slides.removeChild(target);
+                    if( dom.wrapper.querySelectorAll('.slides > section').length == index) document.querySelector( '.navigate-right' ).classList.remove( 'enabled' );
+                }
+            };
+        } );
+		    $(document).ready(function() {
+		    	$('h3').each(function() {
+	    	    	var wordArray = $(this).html().match(/(.+?)(?:(\s|$))/g);
+	    	    	var currentHTML = '';
+	    	    	if(wordArray != null) {
+		    	    	for(var i=0;i<wordArray.length;i++) {
+		    	    	    currentHTML += "<span>" + wordArray[i].trim() + "</span>";
+		    	    	}
+	    	    	}
+	    	    	$(this).html(currentHTML)
+		    	});
+		    	$('p').each(function() {
+	    	    	var wordArray = $(this).html().match(/(.+?)(?:(\s|$))/g);
+	    	    	var currentHTML = '';
+	    	    	if(wordArray != null) {
+		    	    	for(var i=0;i<wordArray.length;i++) {
+		    	    	    currentHTML += "<span>" + wordArray[i].trim() + "</span>";
+		    	    	}
+	    	    	}
+	    	    	$(this).html(currentHTML)
+		    	});
+
+	    		$('h3 span').mouseover(function() {
+	    			$(this).addClass('highlight')
+	    		});
+	    		$('h3 span').mouseout(function() {
+	    			$(this).removeClass('highlight')
+	    		});
+	    		$('p span').mouseover(function() {
+	    			$(this).addClass('highlight')
+	    		});
+	    		$('p span').mouseout(function() {
+	    			$(this).removeClass('highlight')
+	    		});
+
+		    })
+
+		</script>
+
+	</body>
+</html>
