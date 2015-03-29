@@ -342,9 +342,17 @@ grunt.loadNpmTasks('grunt-json-format');
         }
 	});
 
+	grunt.registerTask('copyDependentFilesToReveal', function() {
+		var data = fs.readFileSync('indexLadivaar.html').toString();
+		fs.writeFileSync('../reveal.js/index.html', data)
+
+		var data = fs.readFileSync('lib/jquery-1.11.1.min.js').toString();
+		fs.writeFileSync('../reveal.js/jquery-1.11.1.min.js', data)
+	});
+
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
-    grunt.registerTask('default', ['rename:renameDocxToZip', 'unzip:extractZipFile', 'rename:renameZipToDocx', 'convert:xml2json', 'unicodeConversion', 'json-format:test', 'htmlJsonConversion', 'createJsonFilesOnGivenRange']);
+    grunt.registerTask('default', ['rename:renameDocxToZip', 'unzip:extractZipFile', 'rename:renameZipToDocx', 'convert:xml2json', 'unicodeConversion', 'json-format:test', 'htmlJsonConversion', 'createJsonFilesOnGivenRange', 'copyDependentFilesToReveal']);
 }
 
 var convertToUnicodeCLI = function(text, mappingString) {
