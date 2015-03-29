@@ -24,7 +24,7 @@ First time ever created a **JSON** of complete **Sri Guru Granth Sahib Jeeee** w
 ##Demo Video
 [video-facebook](https://www.facebook.com/video.php?v=10206886710032648&set=vb.1424264057&type=2&theater)
 
-[![video-facebook](https://raw.githubusercontent.com/harpreetkhalsagtbit/ladivaar/lazyLoadSlides/assets/video%20sample.png)](https://www.facebook.com/video.php?v=10206886710032648&set=vb.1424264057&type=2&theater)
+[![video-facebook](https://raw.githubusercontent.com/harpreetkhalsagtbit/ladivaar/master/assets/video%20sample.png)](https://www.facebook.com/video.php?v=10206886710032648&set=vb.1424264057&type=2&theater)
 
 ##Demo Images##
 ![Waheguru](/assets/larivarpadchedhighlighter.png?raw=true)
