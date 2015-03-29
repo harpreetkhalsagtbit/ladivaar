@@ -159,9 +159,15 @@ grunt.loadNpmTasks('grunt-json-format');
 			}
 			gurbaniJSON["w:document"]["w:body"]["w:p"] = _docContent
 		}
+
+		var _lastAng = unicodeJsonObject[unicodeJsonObject.length - 1]["arrayOfPankti"]
+		var _lastPankti = _lastAng[_lastAng.length - 1]
+		_lastPankti["pageBreak"] = true
+		_lastPankti["ang"] = 1430
         fs.writeFileSync('SGGS.json', JSON.stringify(unicodeJsonObject));
 	});
-
+	
+	// Deprecated
 	grunt.registerTask('htmlConversion', function() {
         var _sggsJson = JSON.parse(fs.readFileSync('SGGS.json').toString());
         var _startSection = "<section id='{{_id}}' data-background='#d9a725'>"
@@ -232,9 +238,113 @@ grunt.loadNpmTasks('grunt-json-format');
         fs.writeFileSync('../reveal.js/indexLarivaar.html', _htmlContent)
  	});
 
+	grunt.registerTask('htmlJsonConversion', function() {
+        var _sggsJson = JSON.parse(fs.readFileSync('SGGS.json').toString());
+        var _startSection = "<section id='{{_id}}' data-background='#d9a725'>"
+        var _endSection = "</section>"
+        var _startH_Tag = "<h3>"
+        var _endH_Tag = "</h3>\n"
+        var _startP_Tag = "<p><strong>"
+        var _endP_Tag = "</strong></p>\n"
+
+    	var _ang = '';
+    	var _arrayAngs = [];
+        for(var i=0;i<_sggsJson.length;i++) {
+        	if(_ang == '') {
+        		_ang += _startSection;
+        	}
+        	if(_sggsJson[i]["bold_Pankti"]) {
+        		_ang += _startH_Tag + _sggsJson[i]["bold_Pankti"] + _endH_Tag
+        		if(_sggsJson[i]["pageBreak"]) {
+        			_ang += _endSection
+        			// _ang = _ang.replace("{{_id}}", _sggsJson[i]["ang"])
+        			_arrayAngs.push(_ang)
+        			_ang = '';
+        		}
+
+        	} else if(_sggsJson[i]["arrayOfPankti"]) {
+        		var _newPankti = true;
+        		var _noXML_Preserve = false;
+        		for(var j=0;j<_sggsJson[i]["arrayOfPankti"].length;j++) {
+        			if(_sggsJson[i]["arrayOfPankti"][j]["bold_Pankti"]) {
+		        		_ang += _startH_Tag + _sggsJson[i]["arrayOfPankti"][j]["bold_Pankti"] + _endH_Tag
+        			} else if(_sggsJson[i]["arrayOfPankti"][j]["pankti"]) {
+        				if(_sggsJson[i]["arrayOfPankti"][j]["tab"] && j != 0) {
+        					_ang = _ang.substring(0, _ang.length - _endP_Tag.length)
+			        		_ang += "&nbsp&nbsp&nbsp&nbsp" + _sggsJson[i]["arrayOfPankti"][j]["pankti"] + _endP_Tag
+			        	} else if(_sggsJson[i]["arrayOfPankti"][j]["noXML_Preserve"] && j != 0) {
+        					_ang = _ang.substring(0, _ang.length - _endP_Tag.length)
+			        		_ang += _sggsJson[i]["arrayOfPankti"][j]["pankti"] + _endP_Tag
+			        		_noXML_Preserve = true;
+        				} else {
+        					if(_noXML_Preserve) {
+	        					_ang = _ang.substring(0, _ang.length - _endP_Tag.length)
+				        		_ang += _sggsJson[i]["arrayOfPankti"][j]["pankti"] + _endP_Tag
+				        		_noXML_Preserve = false;
+        					} else {
+				        		_ang += _startP_Tag + _sggsJson[i]["arrayOfPankti"][j]["pankti"] + _endP_Tag
+        					}
+        				}
+        			}
+	        		if(_sggsJson[i]["arrayOfPankti"][j]["pageBreak"]) {
+	        			_ang += _endSection
+	        			// _ang = _ang.replace("{{_id}}", _sggsJson[i]["arrayOfPankti"][j]["ang"])
+	        			_arrayAngs.push(_ang)
+	        			_ang = '';
+	        		}
+	        		_newPankti = false;
+        		}
+        	}
+        	if(i == _sggsJson.length) {
+        		// No page break at last
+    			_ang += _endSection
+    			_ang = _ang.replace("{{_id}}", "1430")
+    			_arrayAngs.push(_ang)
+    			_ang = '';
+        	}
+        }
+        fs.writeFileSync('../reveal.js/indexLarivaar.json', JSON.stringify(_arrayAngs))
+ 	});
+	grunt.registerTask('createJsonFilesOnGivenRange', function() {
+		var range = 100;
+        var jsonContent = JSON.parse(fs.readFileSync('../reveal.js/indexLarivaar.json').toString());
+        var _count = 0;
+        var splitJson = [];
+        var startIndex = 0;
+        var endIndex = startIndex + range;
+        var ang = 1;
+		var mappingObject = JSON.parse(fs.readFileSync('../Unicode-Input/lib/core/lang/punjabi/_jsonMaps/gurbaniAkharSlim.json').toString());
+        for(var each in jsonContent) {
+        	_count++;
+        	if(_count < endIndex) {
+        		splitJson.push(jsonContent[each].replace("{{_id}}", ang))
+        		ang++;
+        	} else if(_count == endIndex) {
+        		splitJson.push(jsonContent[each].replace("{{_id}}", ang))
+        		ang=1;
+		        var _htmlContent = fs.readFileSync('template.html').toString();
+				
+				var _punjabiAng = convertToUnicodeCLI((startIndex+1) + " - " + _count, mappingObject)
+				_punjabiAng = _punjabiAng.replace("-", "&nbsp-&nbsp")
+		        _htmlContent = _htmlContent.replace("{{angRangePunjabi}}", _punjabiAng)
+		        _htmlContent = _htmlContent.replace("{{angRangeEnglish}}", (startIndex+1) + "&nbsp-&nbsp" + _count)
+		        _htmlContent = _htmlContent.replace("{{sggs_content}}", splitJson.join("\n"))
+		        fs.writeFileSync('../reveal.js/ang/' + (startIndex+1) + "_" + _count + ".html", _htmlContent)
+		        // fs.writeFileSync('../reveal.js/indexLarivaar.html', _htmlContent)
+
+				startIndex = _count
+		        endIndex = startIndex + range
+		        if(endIndex > 1400) {
+		        	endIndex = 1430
+		        }
+        		splitJson.splice(0);
+        	}
+        }
+	});
+
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
-    grunt.registerTask('default', ['rename:renameDocxToZip', 'unzip:extractZipFile', 'rename:renameZipToDocx', 'convert:xml2json', 'unicodeConversion', 'json-format:test', 'htmlConversion']);
+    grunt.registerTask('default', ['rename:renameDocxToZip', 'unzip:extractZipFile', 'rename:renameZipToDocx', 'convert:xml2json', 'unicodeConversion', 'json-format:test', 'htmlJsonConversion', 'createJsonFilesOnGivenRange']);
 }
 
 var convertToUnicodeCLI = function(text, mappingString) {
@@ -257,6 +367,10 @@ var convertToUnicodeCLI = function(text, mappingString) {
     text = text.replace(/ੑੀ/g,"ੀੑ")
     text = text.replace(/ੑੇ/g,"ੇੑ")
     text = text.replace(/ਂੀ/g,"ੀਂ")
+    text = text.replace(/ਿੰੵ/g,"ੵਿੰ")
+    text = text.replace(/ੰੵ/g,"ੵੰ")
+    text = text.replace(/ੑੁ/g,"ੁੑ")
+    text = text.replace(/ੑੈ/g,"ੈੑ")
 
     // text = text.split('<ਬਰ>').join('</p><p>');
     // text = text.split('<ਬਰ>').join('</p><p>');
