@@ -3,7 +3,7 @@ Ladivaar.com
 
 Easy to read **Ladivaar Gurbani Website**
 
-That will **Guide** you while you are **Reading**.
+That will **Guide** you while you **Read**.
 
 First time ever created a **JSON** of complete **Sri Guru Granth Sahib Jeeee** with proper Formatting taking care of **Angs** and number of **Panktiyaan** on each **Ang** with proper **Spacing** and **Text Formatting**.
 
