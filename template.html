@@ -72,6 +72,7 @@
 				color: #1D74FF
 			}
 
+
 		</style>
 		<!-- Printing and PDF exports -->
 		<script>
@@ -92,10 +93,10 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 			<section id="home" data-background='#d9a725'>
-				<h3> ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ</h3>
+				<h1> ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ</h1>
 				<p><strong>(ਲੜੀਵਾਰ)</strong></p>
 				<p><strong>(ਅੰਗ&nbsp{{angRangePunjabi}})</strong></p>
-				<h3> Sri Guru Granth Sahib Jee</h3>
+				<h1> Sri Guru Granth Sahib Jee</h1>
 				<p><strong>(Ladivaar&nbsp-&nbspContinuous)</strong></p>
 				<p><strong>(Ang&nbsp{{angRangeEnglish}})</strong></p>
 				<pre><strong>Instructions/User Manual</strong></pre>
@@ -132,7 +133,7 @@
 				    }
 				} );
 
-		    	$('h3').each(function() {
+		    	$('h1').each(function() {
 	    	    	var wordArray = $(this).html().match(/(.+?)(?:(\s|$))/g);
 	    	    	var currentHTML = '';
 	    	    	if(wordArray != null) {
@@ -153,10 +154,10 @@
 	    	    	$(this).html(currentHTML)
 		    	});
 
-	    		$('h3 span').mouseover(function() {
+	    		$('h1 span').mouseover(function() {
 	    			$(this).addClass('highlight')
 	    		});
-	    		$('h3 span').mouseout(function() {
+	    		$('h1 span').mouseout(function() {
 	    			$(this).removeClass('highlight')
 	    		});
 	    		$('p span').mouseover(function() {
