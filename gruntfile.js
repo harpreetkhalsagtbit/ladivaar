@@ -172,8 +172,8 @@ grunt.loadNpmTasks('grunt-json-format');
         var _sggsJson = JSON.parse(fs.readFileSync('SGGS.json').toString());
         var _startSection = "<section id='{{_id}}' data-background='#d9a725'>"
         var _endSection = "</section>\n"
-        var _startH_Tag = "<h3>"
-        var _endH_Tag = "</h3>\n"
+        var _startH_Tag = "<h1>"
+        var _endH_Tag = "</h1>\n"
         var _startP_Tag = "<p><strong>"
         var _endP_Tag = "</strong></p>\n"
 
@@ -242,8 +242,8 @@ grunt.loadNpmTasks('grunt-json-format');
         var _sggsJson = JSON.parse(fs.readFileSync('SGGS.json').toString());
         var _startSection = "<section id='{{_id}}' data-background='#d9a725'>"
         var _endSection = "</section>"
-        var _startH_Tag = "<h3>"
-        var _endH_Tag = "</h3>\n"
+        var _startH_Tag = "<h1>"
+        var _endH_Tag = "</h1>\n"
         var _startP_Tag = "<p><strong>"
         var _endP_Tag = "</strong></p>\n"
 
@@ -348,6 +348,8 @@ grunt.loadNpmTasks('grunt-json-format');
 
 		var data = fs.readFileSync('lib/jquery-1.11.1.min.js').toString();
 		fs.writeFileSync('../reveal.js/jquery-1.11.1.min.js', data)
+		var fsExtra = require('fs-extra')
+		fsExtra.copy("fonts/NotoSansGurmukhi-Regular.ttf","../reveal.js/NotoSansGurmukhi-Regular.ttf")
 	});
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
