@@ -314,6 +314,11 @@ grunt.loadNpmTasks('grunt-json-format');
         var endIndex = startIndex + range;
         var ang = 1;
 		var mappingObject = JSON.parse(fs.readFileSync('../Unicode-Input/lib/core/lang/punjabi/_jsonMaps/gurbaniAkharSlim.json').toString());
+
+		var dir = "../reveal.js/ang"
+		if (!fs.existsSync(dir)){
+		    fs.mkdirSync(dir);
+		}
         for(var each in jsonContent) {
         	_count++;
         	if(_count < endIndex) {
