@@ -23,6 +23,7 @@ First time ever created a **JSON** of complete **Sri Guru Granth Sahib Jeeee** w
 
 ##Authors By##
 [Harpreet Singh](https://github.com/harpreetkhalsagtbit)
+
 [Kuljeet Singh](https://github.com/ksr89)
 
 ##Demo Video
