@@ -512,7 +512,7 @@
 		    $(document).ready(function() {
 		    	$('.navigate-left').append('<span>Previous</span>')
 		    	$('.navigate-right').append('<span>Next</span>')
-		    	$('h3').each(function() {
+		    	$('h1').each(function() {
 	    	    	var wordArray = $(this).html().match(/(.+?)(?:(\s|$))/g);
 	    	    	var currentHTML = '';
 	    	    	if(wordArray != null) {
@@ -533,10 +533,10 @@
 	    	    	$(this).html(currentHTML)
 		    	});
 
-	    		$('h3 span').mouseover(function() {
+	    		$('h1 span').mouseover(function() {
 	    			$(this).addClass('highlight')
 	    		});
-	    		$('h3 span').mouseout(function() {
+	    		$('h1 span').mouseout(function() {
 	    			$(this).removeClass('highlight')
 	    		});
 	    		$('p span').mouseover(function() {
