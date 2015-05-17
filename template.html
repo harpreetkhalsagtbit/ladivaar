@@ -20,7 +20,37 @@
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="../lib/css/zenburn.css">
 		<style type="text/css">
+			.controls {
+				position: relative !important;
+				width: 100% !important;
+			}
 
+			.navigate-left {
+				margin-left: 50px !important;
+				border-right-color: black !important;
+				line-height: 0px !important;
+			}
+
+			.navigate-left span {
+				float: left;
+				font-size: 20px;
+				margin-left: 30px;
+			}
+
+			.navigate-right {
+				float: right;
+				left: calc(100% -  50px) !important;
+				right: 0;
+				margin-right: 50px !important;
+				border-left-color: black !important;
+				line-height: 0px !important;
+			} 
+
+			.navigate-right span {
+				float: right;
+				font-size: 20px;
+				margin-right: 30px;
+			}
 			
 			@font-face {
 			 font-family: 'Dejaweb';
@@ -126,7 +156,8 @@
 				transition: 'slide' // none/fade/slide/convex/concave/zoom
 			});
 		    $(document).ready(function() {
-
+		    	$('.navigate-left').append('<span>Previous</span>')
+		    	$('.navigate-right').append('<span>Next</span>')
 				Reveal.addEventListener( 'slidechanged', function( event ) {
 				    if(Reveal.isLastSlide()) {
 				    	console.log("Load next")
