@@ -20,6 +20,20 @@
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 		<style type="text/css">
+
+			@font-face {
+			 font-family: 'Dejaweb';
+			 src: url('NotoSansGurmukhi-Regular.ttf');
+			}
+
+			.reveal .slides > section, .reveal .slides > section > section {
+				padding: 0px;
+			}
+
+			.reveal h1 {
+				font-family: 'Dejaweb';
+				font-size: 1.5em;
+			}
 			.reveal p {
 				font-size: 25px;
 				margin: 5px;
@@ -39,12 +53,16 @@
 			}
 			
 			.reveal a {
-			  color: #351907;
+				font-family: 'Dejaweb';
+			 	color: #351907;
 			}
 			.reveal a:hover {
 			  color: #1D74FF;
 			}
 
+			.reveal table th {
+				text-align: center;
+			}
 		</style>
 		<!-- Printing and PDF exports -->
 		<script>
@@ -65,7 +83,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section id="home" data-background="#d9a725" class="has-light-background present" style="top: 34.5px; display: block;">
-					<h2>Sri Guru Granth Sahib Sainchiyan Ladivaar</h2>
+					<h1>Sri Guru Granth Sahib Sainchiyan Ladivaar</h1>
 					<table>
 						<thead>
 							<tr>
@@ -109,7 +127,6 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
-		<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
 
 		<script>
 
