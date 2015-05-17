@@ -27,7 +27,7 @@
 
 			.navigate-left {
 				margin-left: 50px !important;
-				border-right-color: black !important;
+				border-right-color: #66648E !important;
 				line-height: 0px !important;
 			}
 
@@ -35,6 +35,7 @@
 				float: left;
 				font-size: 20px;
 				margin-left: 30px;
+				color: #66648E;
 			}
 
 			.navigate-right {
@@ -42,7 +43,7 @@
 				left: calc(100% -  50px) !important;
 				right: 0;
 				margin-right: 50px !important;
-				border-left-color: black !important;
+				border-left-color: #66648E !important;
 				line-height: 0px !important;
 			} 
 
@@ -50,6 +51,15 @@
 				float: right;
 				font-size: 20px;
 				margin-right: 30px;
+				color: #66648E;
+			}
+
+			.navigate-up {
+				display: none;
+			}
+
+			.navigate-down {
+				display: none;
 			}
 			
 			@font-face {
@@ -69,7 +79,7 @@
 				font-family: 'Dejaweb';
 				font-size: 25px;
 				margin: 5px;
-				color: #351907
+				color: #66648E
 			}
 		
 			.reveal pre {
@@ -77,7 +87,8 @@
 			}
 
 			.highlight {
-				background: #1D74FF;
+				background: #F7941E;
+				color: #FFFFFF;
 			}
 
 			span {
@@ -95,13 +106,16 @@
 			.reveal a {
 				font-size: 28px;
 				text-decoration: underline;
-				color: #351907
+				color: #66648E
 			}
 
 			.reveal a:hover {
-				color: #1D74FF
+				color: #F7941E
 			}
 
+			.reveal h1 {
+				color: #F7941E !important;
+			}
 
 		</style>
 		<!-- Printing and PDF exports -->
@@ -122,7 +136,7 @@
 		<div class="reveal">
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-			<section id="home" data-background='#d9a725'>
+			<section id="home" data-background='#FFFFFF'>
 				<h1> ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ</h1>
 				<p><strong>(ਲੜੀਵਾਰ)</strong></p>
 				<p><strong>(ਅੰਗ&nbsp{{angRangePunjabi}})</strong></p>
