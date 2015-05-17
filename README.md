@@ -21,6 +21,10 @@ First time ever created a **JSON** of complete **Sri Guru Granth Sahib Jeeee** w
 
 [Reveal.js](https://github.com/hakimel/reveal.js)
 
+##Authors By##
+[Harpreet Singh](https://github.com/harpreetkhalsagtbit)
+[Kuljeet Singh](https://github.com/ksr89)
+
 ##Demo Video
 [video-google+](https://www.facebook.com/video.php?v=10206886710032648&set=vb.1424264057&type=2&theater)
 
